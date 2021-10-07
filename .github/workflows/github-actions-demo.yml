@@ -17,4 +17,6 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Check how secrets work
+        run: echo "The secret is `${{ secrets.SUPER_SPECIAL_SECRET }}`"
       - run: echo "🍏 This job's status is ${{ job.status }}."
