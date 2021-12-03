@@ -1,0 +1,14 @@
+name: Matrix with use
+
+on:
+  workflow_dispatch
+
+jobs:
+
+  matrix:
+    strategy:
+      matrix:
+        args: [1,2,3,4]
+    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@f25d49dca916279bbe809b677983e703e0877d12
+    with:
+      arg: ${{ matrix.args }}
