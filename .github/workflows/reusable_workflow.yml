@@ -1,0 +1,17 @@
+name: Reusable workflow
+
+on:
+  workflow_call:
+    inputs:
+
+      arg:
+        name: "Some arguments"
+        type: string
+        required: true
+
+jobs:
+
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Reusable arg ${{ inputs.arg }}"
