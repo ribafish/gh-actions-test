@@ -6,7 +6,7 @@ on:
 jobs:
 
   timeout-runner:
-    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@fb340112810e994027fc1119564c0e97195f39f7f
+    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@5b1df629a952267330aa41e2a8927a0e598b8dbe
     with:
       arg: thing
       timeout-minutes: 10
