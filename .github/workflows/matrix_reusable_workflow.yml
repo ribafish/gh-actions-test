@@ -5,10 +5,13 @@ on:
 
 jobs:
 
-  matrix:
+  matrix-runner:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         args: [1,2,3,4]
-    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@f25d49dca916279bbe809b677983e703e0877d12
-    with:
-      arg: ${{ matrix.args }}
+    steps:
+      - name: "Matrixed step"
+        uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@f25d49dca916279bbe809b677983e703e0877d12
+        with:
+          arg: ${{ matrix.args }}
