@@ -5,13 +5,19 @@ on:
 
 jobs:
 
-  matrix-runner:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        args: [1,2,3,4]
-    steps:
-      - name: "Matrixed step"
-        uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@f25d49dca916279bbe809b677983e703e0877d12
-        with:
-          arg: ${{ matrix.args }}
+  timeout-runner:
+    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@fb340112810e994027fc1119564c0e97195f39f7f
+    with:
+      arg: thing
+      timeout-minutes: 10
+
+  # matrix-runner:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       args: [1,2,3,4]
+  #   steps:
+  #     - name: "Matrixed step"
+  #       uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@f25d49dca916279bbe809b677983e703e0877d12
+  #       with:
+  #         arg: ${{ matrix.args }}
