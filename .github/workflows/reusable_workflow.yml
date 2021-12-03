@@ -9,9 +9,31 @@ on:
         type: string
         required: true
 
+      timeout-minutes:
+        description: "Timeout of the specified task in minutes"
+        type: number
+        required: true
+        default: 100
+
 jobs:
 
   echo:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Reusable arg ${{ inputs.arg }}"
+
+  timeout-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    steps:
+      - run: echo "timeout-job"
+
+  timeout-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: timeout-step
+        timeout-minutes: ${{ inputs.timeout-minutes }}
+        run: echo "timeout-steps"
+
+
+
