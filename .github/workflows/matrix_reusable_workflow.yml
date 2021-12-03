@@ -1,8 +1,9 @@
 name: Matrix with use
 
 on:
-  workflow_dispatch
-  push
+  push:
+    branches:
+      - main
 
 jobs:
 
