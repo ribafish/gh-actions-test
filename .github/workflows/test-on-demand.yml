@@ -27,3 +27,10 @@ jobs:
     if: github.event.inputs.cond
     steps:
       - run: echo "Conditionally ${{ github.event.inputs.cond }}"
+    
+            
+  conditional_not:
+    runs-on: ubuntu-latest
+    if: ! ${{ github.event.inputs.cond }}
+    steps:
+      - run: echo "Conditionally not ${{ github.event.inputs.cond }}"
