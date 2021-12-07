@@ -10,6 +10,9 @@ on:
         description: 'location'
         required: false
         default: 'The Octoverse'
+      cond:
+        description: 'Conditional input'
+        required: false
 
 jobs:
   say_hello:
@@ -18,3 +21,9 @@ jobs:
       - run: |
           echo "Hello ${{ github.event.inputs.name }}!"
           echo "- in ${{ github.event.inputs.home }}!"
+          
+  conditional:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.cond
+    steps:
+      - run: echo "Conditionally ${{ github.event.inputs.cond }}"
