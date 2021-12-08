@@ -2,6 +2,11 @@ name: Manual CurrentProdDebug build workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      force_version_code:
+        description: 'Force the built version code to the specified number [leave empty unless needed!]'
+        required: false
+        default: ''
 
 jobs:
 
