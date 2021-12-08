@@ -15,7 +15,7 @@ jobs:
     if: github.event.inputs.force_version_code == ''
     uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@8891b7e5d6333d0e214522870340c7892d203dfb
     with:
-      arg: ":target:mobile:app:assembleCurrentProdDebug"
+      arg: :target:mobile:app:assembleCurrentProdDebug
       timeout-minutes: 10
       
   assemble_prod_debug_apk_force_version_code:
@@ -23,5 +23,5 @@ jobs:
     if: github.event.inputs.force_version_code != ''
     uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@8891b7e5d6333d0e214522870340c7892d203dfb
     with:
-      arg: "forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug"
+      arg: forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug
       timeout-minutes: 10
