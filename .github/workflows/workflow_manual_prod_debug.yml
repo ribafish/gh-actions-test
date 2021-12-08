@@ -13,15 +13,17 @@ jobs:
   assemble_prod_debug_apk:
     name: Manual build CurrentProdDebug apk
     if: github.event.inputs.force_version_code == ''
-    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@8891b7e5d6333d0e214522870340c7892d203dfb
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@ce09bd6cc155e3fcce464b1e1123c3fbebf340e5
     with:
-      arg: ":target:mobile:app:assembleCurrentProdDebug"
-      timeout-minutes: 10
+      gradle_task: :target:mobile:app:assembleCurrentProdDebug
+      success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
+      success_artefact_name: app-current-prod-debug.apk
       
   assemble_prod_debug_apk_force_version_code:
-    name: Manual build prod debug apk - Forced version code
+    name: Manual build CurrentProdDebug apk - Forced version code
     if: github.event.inputs.force_version_code != ''
-    uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@8891b7e5d6333d0e214522870340c7892d203dfb
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@ce09bd6cc155e3fcce464b1e1123c3fbebf340e5
     with:
-      arg: "forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug"
-      timeout-minutes: 10
+      gradle_task: forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug
+      success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
+      success_artefact_name: app-current-prod-debug.apk
