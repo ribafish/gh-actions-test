@@ -87,6 +87,9 @@ jobs:
     runs-on: ${{ inputs.runner }}
     timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
       - run: echo "runner ${{ inputs.runner }}"
       - run: echo "gradle_task ${{ inputs.gradle_task }}"
       - run: echo "parallel ${{ inputs.parallel }}"
@@ -100,6 +103,7 @@ jobs:
       - run: echo "failure_artefact_location ${{ inputs.failure_artefact_location }}"
       - run: echo "failure_artefact_name ${{ inputs.failure_artefact_name }}"
       - run: echo "timeout-minutes ${{ inputs.timeout-minutes }}"
+      
       - name: Run Gradle task
         timeout-minutes: 80
         run: >-
