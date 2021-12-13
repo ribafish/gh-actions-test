@@ -7,23 +7,27 @@ on:
         description: 'Force the built version code to the specified number [leave empty unless needed!]'
         required: false
         default: ''
+      gradle_flags:
+        description: 'Additional gradle flags to add the the build after the assemble task.'
+        required: false
+        default: ''
 
 jobs:
 
   assemble_prod_debug_apk:
     name: Manual build CurrentProdDebug apk
     if: github.event.inputs.force_version_code == ''
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@ce09bd6cc155e3fcce464b1e1123c3fbebf340e5
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@f6504bea2325c19c7c66c50d717bbcd3987b319b
     with:
-      gradle_task: ":target:mobile:app:assembleCurrentProdDebug"
+      gradle_task: "tasks  ${{ github.event.inputs.gradle_flags }}"
       success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
       success_artefact_name: app-current-prod-debug.apk
       
   assemble_prod_debug_apk_force_version_code:
     name: Manual build CurrentProdDebug apk - Forced version code
     if: github.event.inputs.force_version_code != ''
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@ce09bd6cc155e3fcce464b1e1123c3fbebf340e5
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@f6504bea2325c19c7c66c50d717bbcd3987b319b
     with:
-      gradle_task: "forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug"
+      gradle_task: "forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug  ${{ github.event.inputs.gradle_flags }}"
       success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
       success_artefact_name: app-current-prod-debug.apk
