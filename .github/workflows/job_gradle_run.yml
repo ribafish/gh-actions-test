@@ -100,3 +100,14 @@ jobs:
       - run: echo "failure_artefact_location ${{ inputs.failure_artefact_location }}"
       - run: echo "failure_artefact_name ${{ inputs.failure_artefact_name }}"
       - run: echo "timeout-minutes ${{ inputs.timeout-minutes }}"
+      - name: Run Gradle task
+        timeout-minutes: 80
+        run: >-
+          ./gradlew ${{ inputs.gradle_task }}
+          -Dorg.gradle.parallel=${{ inputs.parallel }}
+          -Dorg.gradle.caching=${{ inputs.build_cache }}
+          -Dorg.gradle.java.home=${{ inputs.java_home }}
+          -Dorg.gradle.jvmargs="${{ inputs.jvm_args }}"
+          -Pandroid.builder.sdkDownload=${{ inputs.sdk_download }}
+          -PglobalidMavenUsername=${{ github.actor }}
+          -PglobalidMavenPassword=${{ secrets.GITHUB_TOKEN }}
