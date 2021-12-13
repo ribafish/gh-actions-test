@@ -17,7 +17,7 @@ jobs:
   assemble_prod_debug_apk:
     name: Manual build CurrentProdDebug apk
     if: github.event.inputs.force_version_code == ''
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@f6504bea2325c19c7c66c50d717bbcd3987b319b
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@3fa9a0b309f4327b5a74e4d46ccf9f9406d60baa
     with:
       gradle_task: "tasks  ${{ github.event.inputs.gradle_flags }}"
       success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
@@ -26,7 +26,7 @@ jobs:
   assemble_prod_debug_apk_force_version_code:
     name: Manual build CurrentProdDebug apk - Forced version code
     if: github.event.inputs.force_version_code != ''
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@f6504bea2325c19c7c66c50d717bbcd3987b319b
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@3fa9a0b309f4327b5a74e4d46ccf9f9406d60baa
     with:
       gradle_task: "forceVersionCode --code ${{ github.event.inputs.force_version_code }} clean :target:mobile:app:assembleCurrentProdDebug  ${{ github.event.inputs.gradle_flags }}"
       success_artefact_location: target/mobile/app/build/outputs/apk/currentProd/debug/app-current-prod-debug.apk
