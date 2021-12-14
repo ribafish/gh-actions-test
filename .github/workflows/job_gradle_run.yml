@@ -82,6 +82,12 @@ on:
         required: false
         default: 100
 
+      workDir:
+        description: "Working directory, in which the gradle command will be executed"
+        type: string
+        required: false
+        default: ''
+
 jobs:
   gradle-task:
     runs-on: ${{ inputs.runner }}
@@ -103,9 +109,10 @@ jobs:
       - run: echo "failure_artefact_location ${{ inputs.failure_artefact_location }}"
       - run: echo "failure_artefact_name ${{ inputs.failure_artefact_name }}"
       - run: echo "timeout-minutes ${{ inputs.timeout-minutes }}"
-      
+
       - name: Run Gradle task
         timeout-minutes: 80
+        working-directory: ./${{ inputs.workDir }}
         run: >-
           ./gradlew ${{ inputs.gradle_task }}
           -Dorg.gradle.parallel=${{ inputs.parallel }}
