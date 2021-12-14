@@ -1,0 +1,15 @@
+name: Workflows on push with path
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'testPath/**'
+jobs:
+  gradle-testPath:
+    name: Test path conditionals
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@784dae03928d65ccf7906439b0d98f4987c36414
+    with:
+      gradle_task: "tasks"
+      workDir: 'testPath'
+      
