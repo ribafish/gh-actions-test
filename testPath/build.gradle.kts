@@ -5,3 +5,10 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.3.1/samples
  * This project uses @Incubating APIs which are subject to change.
  */
+
+
+ tasks.register("hello") {
+    doLast {
+        println("hello")
+    }
+}
