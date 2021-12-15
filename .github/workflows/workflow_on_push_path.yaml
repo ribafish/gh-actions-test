@@ -8,7 +8,7 @@ on:
 jobs:
   gradle-testPath:
     name: Test path conditionals
-    uses: ./.github/actions/action_gradle_run.yml
+    uses: ./.github/action_gradle_run
     with:
       gradle_task: "tasks --all"
       workDir: 'testPath'
