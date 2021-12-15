@@ -13,7 +13,7 @@
     }
 }
 
- tasks.register("hello5") {
+ tasks.register("hello6") {
     doLast {
         println("hello")
     }
