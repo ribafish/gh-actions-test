@@ -35,7 +35,7 @@ jobs:
   test_composite_action2:
     runs-on: ubuntu-latest
     steps:
-      - uses: ribafish/action-gradle-run@v6
+      - uses: ribafish/action-gradle-run@v7
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
