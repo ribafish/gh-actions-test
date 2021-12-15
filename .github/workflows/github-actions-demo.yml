@@ -4,7 +4,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-    
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -32,11 +32,21 @@ jobs:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
           gradle_flags: "-PglobalidMavenUsername2=${{ github.actor }} -PglobalidMavenPassword2=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
-      - uses: ribafish/action-gradle-run@v3
+  test_composite_action2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - uses: ribafish/action-gradle-run@v5
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
           gradle_flags: "-PglobalidMavenUsername2=${{ github.actor }} -PglobalidMavenPassword2=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
+  test_composite_action3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
       - uses: ribafish/action-gradle-run@main
         with:
           gradle_task: "tasks --all"
