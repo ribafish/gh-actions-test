@@ -30,7 +30,13 @@ jobs:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
           gradle_flags: "-PglobalidMavenUsername=${{ github.actor }} -PglobalidMavenPassword=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
-      # - uses: ribafish/action-gradle-run@v2
-      #   with:
-      #     gradle_task: "tasks --all"
-      #     gradle_workDir: 'testPath'
+      - uses: ribafish/action-gradle-run@v3
+        with:
+          gradle_task: "tasks --all"
+          gradle_workDir: 'testPath'
+          gradle_flags: "-PglobalidMavenUsername=${{ github.actor }} -PglobalidMavenPassword=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
+      - uses: ribafish/action-gradle-run@main
+        with:
+          gradle_task: "tasks --all"
+          gradle_workDir: 'testPath'
+          gradle_flags: "-PglobalidMavenUsername=${{ github.actor }} -PglobalidMavenPassword=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
