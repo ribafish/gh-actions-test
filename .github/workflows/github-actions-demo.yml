@@ -53,3 +53,10 @@ jobs:
           maven_username: ${{ github.actor }}
           maven_password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           condition: WAZZAAAPPPP
+  test_composite_action4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ribafish/action-gradle-run@main
+        with:
+          gradle_task: "tasks --all"
+          gradle_workDir: 'testPath'
