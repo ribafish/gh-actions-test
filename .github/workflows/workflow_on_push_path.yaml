@@ -11,5 +11,5 @@ jobs:
     uses: ribafish/action-gradle-run@v1
     with:
       gradle_task: "tasks --all"
-      workDir: 'testPath'
+      gradle_workDir: 'testPath'
       
