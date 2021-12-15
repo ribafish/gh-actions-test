@@ -22,7 +22,8 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
   test_composite_action:
     runs-on: ubuntu-latest
-    uses: ribafish/action-gradle-run@v1
-    with:
-      gradle_task: "tasks --all"
-      gradle_workDir: 'testPath'
+    steps:
+      - uses: ./.github/actions/action_gradle_run
+        with:
+          gradle_task: "tasks --all"
+          gradle_workDir: 'testPath'
