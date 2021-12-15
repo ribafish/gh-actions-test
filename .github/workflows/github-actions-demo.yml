@@ -23,7 +23,13 @@ jobs:
   test_composite_action:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
       - uses: ./.github/actions/action_gradle_run
+        with:
+          gradle_task: "tasks --all"
+          gradle_workDir: 'testPath'
+      - uses: ribafish/action-gradle-run@v1
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
