@@ -20,3 +20,9 @@ jobs:
       - name: Check how secrets work
         run: echo "The secret is `${{ secrets.SUPER_SPECIAL_SECRET }}`"
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  test_composite_action:
+    runs-on: ubuntu-latest
+    uses: ribafish/action-gradle-run@v1
+    with:
+      gradle_task: "tasks --all"
+      gradle_workDir: 'testPath'
