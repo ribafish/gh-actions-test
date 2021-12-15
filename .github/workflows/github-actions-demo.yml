@@ -29,7 +29,7 @@ jobs:
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
-      - uses: ribafish/action-gradle-run@v1
+      - uses: ribafish/action-gradle-run@v2
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
