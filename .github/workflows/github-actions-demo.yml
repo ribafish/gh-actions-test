@@ -52,3 +52,4 @@ jobs:
           gradle_flags: "-PglobalidMavenUsername2=${{ github.actor }} -PglobalidMavenPassword2=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
           maven_username: ${{ github.actor }}
           maven_password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          condition: WAZZAAAPPPP
