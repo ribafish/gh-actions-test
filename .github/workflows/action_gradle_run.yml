@@ -88,10 +88,9 @@ on:
         required: false
         default: ''
 
-jobs:
-  gradle-task:
-    runs-on: ${{ inputs.runner }}
-    timeout-minutes: ${{ inputs.timeout-minutes }}
+runs:
+  using: "composite"
+  steps:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
@@ -111,7 +110,6 @@ jobs:
       - run: echo "timeout-minutes ${{ inputs.timeout-minutes }}"
 
       - name: Run Gradle task
-        timeout-minutes: 80
         working-directory: ./${{ inputs.workDir }}
         run: >-
           ./gradlew ${{ inputs.gradle_task }}

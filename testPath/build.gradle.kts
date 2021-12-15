@@ -12,3 +12,10 @@
         println("hello")
     }
 }
+
+ tasks.register("hello2") {
+    doLast {
+        println("hello")
+    }
+}
+
