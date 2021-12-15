@@ -40,6 +40,8 @@ jobs:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
           gradle_flags: "-PglobalidMavenUsername2=${{ github.actor }} -PglobalidMavenPassword2=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
+          maven_username: ${{ github.actor }}
+          maven_password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   test_composite_action3:
     runs-on: ubuntu-latest
     steps:
@@ -48,3 +50,5 @@ jobs:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
           gradle_flags: "-PglobalidMavenUsername2=${{ github.actor }} -PglobalidMavenPassword2=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"
+          maven_username: ${{ github.actor }}
+          maven_password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
