@@ -1,92 +1,79 @@
 name: "Gradle run"
-# "Runs gradle tasks with preset and customizable arguments and flags"
+description: "Runs gradle tasks with preset and customizable arguments and flags"
 
-on:
-  workflow_call:
-    inputs:
+inputs:
 
-      runner:
-        description: "Runs on [ubuntu-latest] setting"
-        type: string
-        required: false
-        default: 'ubuntu-latest'
+  gradle_task:
+    description: "The gradle task you wish to run"
+    type: string
+    required: true
 
-      gradle_task:
-        description: "The gradle task you wish to run"
-        type: string
-        required: true
+  gradle_workDir:
+    description: "Working directory, in which the gradle command will be executed"
+    type: string
+    required: false
+    default: ''
+    
+  parallel:
+    description: "Set parallel build [true]"
+    type: boolean
+    required: false
+    default: true
 
-      parallel:
-        description: "Set parallel build [true]"
-        type: boolean
-        required: false
-        default: true
+  build_cache:
+    description: "Set build cache enabled [false]"
+    type: boolean
+    required: false
+    default: false
 
-      build_cache:
-        description: "Set build cache enabled [false]"
-        type: boolean
-        required: false
-        default: false
+  clean_build:
+    description: "WIP - Execute clean prior to running main task [false]"
+    type: boolean
+    required: false
+    default: false
 
-      clean_build:
-        description: "WIP - Execute clean prior to running main task [false]"
-        type: boolean
-        required: false
-        default: false
+  sdk_download:
+    description: "Download sdk image -Pandroid.builder.sdkDownload [false]"
+    type: boolean
+    required: false
+    default: false
 
-      sdk_download:
-        description: "Download sdk image -Pandroid.builder.sdkDownload [false]"
-        type: boolean
-        required: false
-        default: false
+  jvm_args:
+    description: "Jvm Args [-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Dkotlin.daemon.jvm.options=-Xmx1g]"
+    type: string
+    required: false
+    default: '-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Dkotlin.daemon.jvm.options=-Xmx1g'
 
-      jvm_args:
-        description: "Jvm Args [-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Dkotlin.daemon.jvm.options=-Xmx1g]"
-        type: string
-        required: false
-        default: '-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Dkotlin.daemon.jvm.options=-Xmx1g'
+  java_home:
+    description: "Java home args [$JAVA_HOME_11_X64]"
+    type: string
+    required: false
+    default: $JAVA_HOME_11_X64
 
-      java_home:
-        description: "Java home args [$JAVA_HOME_11_X64]"
-        type: string
-        required: false
-        default: $JAVA_HOME_11_X64
+  success_artefact_location:
+    description: "Location of the artefact to upload if previous step succeeded, upload will not commence if no value is provided [Optional]"
+    type: string
+    required: false
+    default: ''
 
-      success_artefact_location:
-        description: "Location of the artefact to upload if previous step succeeded, upload will not commence if no value is provided [Optional]"
-        type: string
-        required: false
-        default: ''
+  success_artefact_name:
+    description: "Name of the uploaded artefact if previous step succeeded, upload will not commence if no value is provided [Optional]"
+    type: string
+    required: false
+    default: ''
 
-      success_artefact_name:
-        description: "Name of the uploaded artefact if previous step succeeded, upload will not commence if no value is provided [Optional]"
-        type: string
-        required: false
-        default: ''
+  failure_artefact_location:
+    description: "Location of the artefact to upload if previous step failed, upload will not commence if no value is provided [Optional]"
+    type: string
+    required: false
+    default: ''
 
-      failure_artefact_location:
-        description: "Location of the artefact to upload if previous step failed, upload will not commence if no value is provided [Optional]"
-        type: string
-        required: false
-        default: ''
+  failure_artefact_name:
+    description: "Name of the uploaded artefact if previous step failed, upload will not commence if no value is provided [Optional]"
+    type: string
+    required: false
+    default: ''
 
-      failure_artefact_name:
-        description: "Name of the uploaded artefact if previous step failed, upload will not commence if no value is provided [Optional]"
-        type: string
-        required: false
-        default: ''
-
-      timeout-minutes:
-        description: "Timeout of the whole workflow in minutes"
-        type: number
-        required: false
-        default: 100
-
-      workDir:
-        description: "Working directory, in which the gradle command will be executed"
-        type: string
-        required: false
-        default: ''
 
 runs:
   using: "composite"
