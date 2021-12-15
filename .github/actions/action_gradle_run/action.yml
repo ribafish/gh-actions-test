@@ -111,7 +111,7 @@ runs:
       shell: bash
 
     - name: Run Gradle task
-      working-directory: ./${{ inputs.workDir }}
+      working-directory: ./${{ inputs.gradle_workDir }}
       shell: bash
       run: >-
         ./gradlew ${{ inputs.gradle_task }}
