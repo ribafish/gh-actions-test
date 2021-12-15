@@ -60,3 +60,4 @@ jobs:
         with:
           gradle_task: "tasks --all"
           gradle_workDir: 'testPath'
+          build_cache: true
