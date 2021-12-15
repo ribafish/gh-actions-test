@@ -8,7 +8,7 @@ on:
 jobs:
   gradle-testPath:
     name: Test path conditionals
-    uses: ribafish/gh-actions-test/.github/actions/action_gradle_run.yml@5258022b5a71741585dcd0673c2809933bf24f12
+    uses: ./.github/actions/action_gradle_run.yml
     with:
       gradle_task: "tasks --all"
       workDir: 'testPath'
