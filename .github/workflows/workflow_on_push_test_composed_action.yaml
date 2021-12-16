@@ -17,4 +17,3 @@ jobs:
           success_artefact_location: "testPath/build.gradle.kts"
       - run: echo "${{ steps.composite.outputs.success_artefact_location }}"
       
-
