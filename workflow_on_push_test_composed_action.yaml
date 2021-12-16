@@ -1,6 +1,8 @@
-name: Workflows on push with path
+name: Workflows Test custom action
+
 on: 
   push:
+
 jobs:
   test-custom-action:
     name: Test custom action
