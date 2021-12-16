@@ -10,7 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ribafish/github-actions/gradle-run@main
+        id: composite
         with:
           gradle_task: "tasks"
-          workDir: 'testPath'
+          gradle_workDir: 'testPath'
+          success_artefact_location: "testPath/build.gradle.kts"
+      - run: echo "${{ steps.composite.outputs.success_artefact_location }}"
       
