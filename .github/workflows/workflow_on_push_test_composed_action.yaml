@@ -9,7 +9,7 @@ jobs:
     name: Test custom action
     runs-on: ubuntu-latest
     steps:
-      - uses: ribafish/github-ac5tions/gradle-run@main
+      - uses: ribafish/github-actions/gradle-run@main
         with:
           gradle_task: "tasks"
           workDir: 'testPath'
