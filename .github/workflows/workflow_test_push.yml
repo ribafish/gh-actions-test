@@ -3,7 +3,7 @@ name: App Distribution - Current
 on:
   push:
     branches:
-      - 'test_push'
+      - 'main'
       
 jobs:
   dostuff:
@@ -21,11 +21,13 @@ jobs:
         run: |
           git config --global user.name 'GHA-Bot'
           git config --global user.email '<>'
-          git add file.txt
-          git commit -m "Updated file"
+      
+      - name: Tag
+        run: |
+          git tag -a "v1.2" -m "v1.2"
       
       - name: Push commit and tags
         run: |
-          git push origin test_push --tags
+          git push origin main --tags
       
   
