@@ -22,12 +22,18 @@ jobs:
           git config --global user.name 'GHA-Bot'
           git config --global user.email '<>'
       
-      - name: Tag
+      - name: Check env
+        env:
+          TEST_ENV_VAR: "Something Special"
         run: |
-          git tag -a "v1.2" -m "v1.2"
+          printenv
       
-      - name: Push commit and tags
-        run: |
-          git push origin main --tags
+#       - name: Tag
+#         run: |
+#           git tag -a "v1.2" -m "v1.2"
+      
+#       - name: Push commit and tags
+#         run: |
+#           git push origin main --tags
       
   
