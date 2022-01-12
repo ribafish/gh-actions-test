@@ -66,13 +66,21 @@ jobs:
           release_name: Release ${{ steps.version.outputs.version_tag }}
           draft: false
           
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Release Asset1
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./file.txt
-          asset_name: file.txt
+          asset_path: ./artifacts/upload1.txt
+          asset_name: upload1.txt
+          asset_content_type: application/zip
+      - name: Upload Release Asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./artifacts/upload2.txt
+          asset_name: upload2.txt
           asset_content_type: application/zip
