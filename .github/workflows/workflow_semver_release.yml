@@ -6,7 +6,34 @@ on:
       - 'main'
       
 jobs:
+  upload1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: echo upload1 >> upload1.txt
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: upload1.txt
+          path: upload1.txt
+      
+  upload2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: echo upload2 >> upload2.txt
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: upload2.txt
+          path: upload2.txt
+   
   release:
+    needs:
+      - upload1
+      - upload2
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +47,12 @@ jobs:
         with:
           # The prefix to use to identify tags
           branch: "main"
+          
+      - name: Download built artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Display structure of downloaded files
+        run: ls -R
       
       - name: Create Release
         id: create_release
