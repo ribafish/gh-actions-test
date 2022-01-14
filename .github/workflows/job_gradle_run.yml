@@ -2,6 +2,7 @@ name: "Gradle run"
 # "Runs gradle tasks with preset and customizable arguments and flags"
 
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
 
