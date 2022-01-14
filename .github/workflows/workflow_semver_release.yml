@@ -6,40 +6,40 @@ on:
       - 'main'
       
 jobs:
-  upload12:
+  upload1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        name: [upload1,upload2]
+        arch: [arch1,arch2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: echo ${{ matrix.name }} >> ${{ matrix.name }}.txt
+      - run: echo upload1-${{ matrix.arch }} >> upload1-${{ matrix.arch }}.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.name }}
-          path: ${{ matrix.name }}.txt
+          name: upload1-${{ matrix.arch }}
+          path: upload1-${{ matrix.arch }}.txt
       
-  upload34:
+  upload2:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        name: [upload3,upload4]
+        arch: [arch1,arch2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: echo ${{ matrix.name }} >> ${{ matrix.name }}.txt
+      - run: echo upload2-${{ matrix.arch }} >> upload2-${{ matrix.arch }}.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.name }}
-          path: ${{ matrix.name }}.txt
+          name: upload2-${{ matrix.arch }}
+          path: upload2-${{ matrix.arch }}.txt
    
   release:
     needs:
-      - upload12
-      - upload34
+      - upload1
+      - upload2
     runs-on: ubuntu-latest
     outputs:
       release_upload_url: ${{ steps.create_release.outputs.upload_url }}
@@ -71,7 +71,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        file: [upload1,upload2,upload3,upload4]
+        run: [upload1,upload2]
+        arch: [arch1,arch2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -79,7 +80,7 @@ jobs:
       - name: Download built artifacts
         uses: actions/download-artifact@v2
         with:
-          name: ${{ matrix.file }}
+          name: ${{ matrix.run }}-${{ matrix.arch }}
           path: artifacts
 
       - name: Display structure of downloaded files
@@ -91,6 +92,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
           upload_url: ${{ needs.release.outputs.release_upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: artifacts/${{ matrix.file }}.txt
-          asset_name: ${{ matrix.file }}
+          asset_path: artifacts/${{ matrix.run }}-${{ matrix.arch }}.txt
+          asset_name: ${{ matrix.run }}-${{ matrix.arch }}
           asset_content_type: application/zip
