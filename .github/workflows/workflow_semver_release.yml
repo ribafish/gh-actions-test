@@ -65,6 +65,9 @@ jobs:
           tag_name: ${{ steps.version.outputs.version_tag }}
           release_name: Release ${{ steps.version.outputs.version_tag }}
           draft: false
+      
+      - name: Tag latest
+        uses: EndBug/latest-tag@latest
           
   release-artifacts:
     needs: release
@@ -95,6 +98,3 @@ jobs:
           asset_path: artifacts/${{ matrix.run }}-${{ matrix.arch }}.txt
           asset_name: ${{ matrix.run }}-${{ matrix.arch }}
           asset_content_type: application/zip
-          
-      - name: Tag latest
-        run: git tag -a latest -m "Latest release" && git push --tags
