@@ -95,3 +95,6 @@ jobs:
           asset_path: artifacts/${{ matrix.run }}-${{ matrix.arch }}.txt
           asset_name: ${{ matrix.run }}-${{ matrix.arch }}
           asset_content_type: application/zip
+          
+      - name: Tag latest
+        run: git tag -a latest -m "Latest release" && git push --tags
