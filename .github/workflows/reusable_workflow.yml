@@ -20,7 +20,7 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Reusable arg ${{ inputs.arg }}"
+      - run: echo "Reusable arg ${{ inputs.arg }}!"
 
   timeout-job:
     runs-on: ubuntu-latest
