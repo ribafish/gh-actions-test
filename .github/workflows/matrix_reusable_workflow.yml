@@ -10,7 +10,10 @@ jobs:
   timeout-runner:
     uses: ribafish/gh-actions-test/.github/workflows/reusable_workflow.yml@main
     with:
-      arg: thing
+      arg: |
+        thing
+        thing2
+        thing3
       timeout-minutes: 10
 
   # matrix-runner:
