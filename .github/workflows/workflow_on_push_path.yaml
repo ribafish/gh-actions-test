@@ -8,7 +8,7 @@ jobs:
     name: Test path conditionals
     uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@main
     with:
-      gradle_task: |
+      gradle_task: >-
         tasks
         help
         projects
