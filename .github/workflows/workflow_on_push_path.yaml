@@ -3,13 +3,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'testPath/**'
 jobs:
   gradle-testPath:
     name: Test path conditionals
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@3fa9a0b309f4327b5a74e4d46ccf9f9406d60baa
+    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@main
     with:
-      gradle_task: "tasks"
+      gradle_task: |
+        tasks
+        help
+        projects
+        properties
       workDir: 'testPath'
       
