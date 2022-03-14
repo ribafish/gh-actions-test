@@ -1,0 +1,20 @@
+name: Workflows Test custom action
+
+on: 
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  test-custom-action:
+    name: Test custom action
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - uses: ribafish/github-actions/gradle-run@main
+        id: composite
+        with:
+          gradle_task: "tasks"
+          gradle_workDir: 'testPath'
+          success_artefact_location: "testPath/build.gradle.kts"
+      - run: echo "${{ steps.composite.outputs.success_artefact_location }}"
+      
