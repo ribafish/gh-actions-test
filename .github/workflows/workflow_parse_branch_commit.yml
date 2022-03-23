@@ -9,7 +9,9 @@ jobs:
     steps:
       - name: Parse commit sha
         id: sha
-        run: echo "::set-output name=sha_short::${GITHUB_SHA::7}"
-      - name: Parse branch name
+        run: echo "::set-output name=sha_short::${${GITHUB_SHA}::7}"
+      - name: Parse branch name and replace "/" with "_"
         id: branch
-        run: echo "::set-outpu name=branch::${GITHUB_REF_NAME}"
+        run: echo "::set-output name=branch::${${GITHUB_REF_NAME}/\/_}"
+      - name: Combine branch and sha
+        run: echo "::set-output name=branch_sha::${{ steps.branch.outputs.branch }}_${{ steps.sha.outputs.sha_short }}"
