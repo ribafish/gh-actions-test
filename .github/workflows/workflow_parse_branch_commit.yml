@@ -2,16 +2,23 @@ name: Parse branch and commit
 
 on: 
   workflow_dispatch:
+  push:
+    branches: 
+      - feature/somefeature
 
 jobs:
   parse:
     runs-on: ubuntu-latest
+    outputs: 
+      branch_sha: ${{ steps.output.outputs.branch_sha }}
     steps:
-      - name: Parse commit sha
-        id: sha
-        run: echo "::set-output name=sha_short::${${GITHUB_SHA}::7}"
-      - name: Parse branch name and replace "/" with "_"
-        id: branch
-        run: echo "::set-output name=branch::${${GITHUB_REF_NAME}/\/_}"
-      - name: Combine branch and sha
-        run: echo "::set-output name=branch_sha::${{ steps.branch.outputs.branch }}_${{ steps.sha.outputs.sha_short }}"
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+      - id: output
+        run: echo "::set-output name=branch_sha::${GITHUB_REF_SLUG}_${GITHUB_SHA_SHORT}"
+  use:
+    needs: parse
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ needs.parse.outputs.branch_sha }}"
+    
