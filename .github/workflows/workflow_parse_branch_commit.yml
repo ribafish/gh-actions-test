@@ -1,0 +1,15 @@
+name: Parse branch and commit
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse commit sha
+        id: sha
+        run: echo "::set-output name=sha_short::${GITHUB_SHA::7}"
+      - name: Parse branch name
+        id: branch
+        run: echo "::set-outpu name=branch::${GITHUB_REF_NAME}"
