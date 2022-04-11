@@ -22,6 +22,8 @@ jobs:
       - run: |
           echo "Hello ${{ github.event.inputs.name }}!"
           echo "- in ${{ github.event.inputs.home }}!"
+      - run: |
+          if [[ $GITHUB_REF == refs/heads/component* ]] || [[ $GITHUB_REF == refs/heads/develop* ]] ; echo "Don't run on develop/component branches"; exit 1; fi
           
   conditional:
     runs-on: ubuntu-latest
@@ -35,3 +37,4 @@ jobs:
     if: github.event.inputs.cond ==  ''
     steps:
       - run: echo "Conditionally not ${{ github.event.inputs.cond }}"
+
