@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'feature/somefeature'
       
 jobs:
   dostuff:
@@ -17,23 +18,32 @@ jobs:
       - name: Update file
         run: echo "stuff" >> file.txt
         
-      - name: Update Gradle props
+      - name: Update git props
         run: |
           git config --global user.name 'GHA-Bot'
           git config --global user.email '<>'
-      
-      - name: Check env
-        env:
-          TEST_ENV_VAR: "Something Special"
+
+      - name: Push commit and tags
         run: |
-          printenv
+          git add -A
+          git commit -m "Test push changes [Skip CI]"
+
+      - name: Push commit and tags
+        run: |
+          git push origin main
       
-#       - name: Tag
-#         run: |
-#           git tag -a "v1.2" -m "v1.2"
+      # - name: Check env
+      #   env:
+      #     TEST_ENV_VAR: "Something Special"
+      #   run: |
+      #     printenv
       
-#       - name: Push commit and tags
-#         run: |
-#           git push origin main --tags
+      # - name: Tag
+      #   run: |
+      #     git tag -a "v1.2" -m "v1.2"
       
+      # - name: Push commit and tags
+      #   run: |
+      #     git push origin main --tags
+    
   
