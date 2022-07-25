@@ -23,14 +23,14 @@ jobs:
           git config --global user.name 'GHA-Bot'
           git config --global user.email '<>'
 
-      - name: Push commit and tags
+      - name: Git commit
         run: |
           git add -A
           git commit -m "Test push changes [Skip CI]"
 
-      - name: Push commit and tags
+      - name: git push
         run: |
-          git push -u origin main
+          git push
       
       # - name: Check env
       #   env:
