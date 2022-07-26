@@ -38,6 +38,16 @@ jobs:
         run: |
           git push
           git push --tags
+
+      - name: touch file
+        run: touch fileTouch-$GITHUB_SHA_SHORT.txt
+
+      - name: Upload apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: fileTouch-${{ env.GITHUB_SHA_SHORT }}.txt
+          path: fileTouch-${{ env.GITHUB_SHA_SHORT }}.txt
+
       
       # - name: Check env
       #   env:
