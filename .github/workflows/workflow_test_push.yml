@@ -22,7 +22,7 @@ jobs:
         run: echo "stuff" >> file.txt
 
       - name: Update file2
-        run: echo ${{ GITHUB_SHA_SHORT }} >> file.txt
+        run: echo $GITHUB_SHA_SHORT >> file.txt
         
       - name: Update git props
         run: |
