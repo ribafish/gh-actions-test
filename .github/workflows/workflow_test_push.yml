@@ -14,9 +14,15 @@ jobs:
     
       - name: Checkout branch
         uses: actions/checkout@v2
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
         
       - name: Update file
         run: echo "stuff" >> file.txt
+
+      - name: Update file2
+        run: echo ${{ GITHUB_SHA_SHORT }} >> file.txt
         
       - name: Update git props
         run: |
