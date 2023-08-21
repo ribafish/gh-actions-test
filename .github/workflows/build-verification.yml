@@ -1,0 +1,21 @@
+name: Verify Build
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        steps:
+            - id: test
+              run: |
+                  echo "${{ github.ref_name }}"
+                  echo "${{ github.event }}"
+                  echo "${{ github }}
+                  echo "${{ github.base_ref }}
+                  echo "${{ github.event_name }}"
+
