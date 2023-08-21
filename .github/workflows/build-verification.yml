@@ -34,6 +34,8 @@ jobs:
                   ENABLED: $(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)
               run: |
                   echo "$ENABLED"
-                  echo "enabled=$(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)"
+                  echo "$(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)" >> ENABLED2
+            - name: Print ENABLED2
+              run: echo "$ENABLED2"
 
 
