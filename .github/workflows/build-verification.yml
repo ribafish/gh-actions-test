@@ -27,6 +27,8 @@ jobs:
             - name: Dump GitHub context
               env:
                   GITHUB_CONTEXT: ${{ toJson(github) }}
+                  ENABLED: ${{ github.event.inputs.enabled }}
               run: |
                   echo "$GITHUB_CONTEXT"
+                  echo "$ENABLED"
 
