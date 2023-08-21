@@ -15,7 +15,7 @@ jobs:
               run: |
                   echo "${{ github.ref_name }}"
                   echo "${{ github.event }}"
-                  echo "${{ github }}
+                  echo "${{ github }}"
                   echo "${{ github.base_ref }}"
                   echo "${{ github.event_name }}"
             - name: Dump GitHub context
