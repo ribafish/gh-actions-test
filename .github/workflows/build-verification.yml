@@ -29,9 +29,11 @@ jobs:
                   GITHUB_CONTEXT: ${{ toJson(github) }}
               run: |
                   echo "$ENABLED"
+                  echo "$ENABLED3"
             - name: Inputs
               env:
                   ENABLED: $(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)
+                  ENABLED3: ${{ github.event.inputs.enabled }}
               run: |
                   echo "$ENABLED"
                   echo "$(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)" >> ENABLED2
