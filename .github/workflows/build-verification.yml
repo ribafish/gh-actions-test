@@ -5,6 +5,12 @@ on:
         branches: [ main ]
     pull_request:
     workflow_dispatch:
+        inputs:
+            enabled:
+                description: Boolean input
+                required: true
+                default: false
+                type: boolean
 
 jobs:
     test:
