@@ -39,5 +39,9 @@ jobs:
                   echo "$(if ${{ github.event.inputs.enabled == '' }}; then echo 'true'; else echo '${{ github.event.inputs.enabled }}'; fi)" >> ENABLED2
             - name: Print ENABLED2
               run: echo "$ENABLED2"
+            - name: Check pts mode in ENV
+              env:
+                PTS_MODE: "${{ github.ref_name == 'main' && 'REMAINING_TESTS' || 'RELEVANT_TESTS' }}"
+              run: echo "$PTS_MODE"
 
 
