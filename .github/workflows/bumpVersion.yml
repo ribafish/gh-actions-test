@@ -1,0 +1,41 @@
+name: "Staging apk build"
+
+on:
+    push:
+        branches:
+            - 'protected'
+            - 'main'
+
+jobs:
+    build_task:
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        if: ${{ github.actor != 'GHA-Bot' && contains(github.event.commits[0].message, '[Skip CI]') == false }}
+        steps:
+            - name: Checkout branch
+              uses: actions/checkout@v3
+
+            - name: Read Versions Before Bump
+              id: parse_version
+              run: cat config/version/mobile.properties
+
+            - name: Bump Version
+              run: bash .github/scripts/bumpVersion.sh
+
+            - name: Read Versions After Bump
+              id: parse_version
+              run: cat config/version/mobile.properties
+
+            - name: Update Gradle props
+              run: |
+                  git config --global user.name 'GHA-Bot'
+                  git config --global user.email 'gha-bot@noreply.github.com'
+
+            - name: Commit Updated version
+              run: |
+                  git add config/version/mobile.properties
+                  git commit -m "Bump versionCode [Skip CI]"
+
+            - name: Push commit
+              run: |
+                  git push
