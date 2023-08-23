@@ -29,8 +29,10 @@ jobs:
               with:
                   git_user_name: "GHA-Bot"
                   git_user_email: "gha-bot@noreply.github.com"
-                  temp_branch_prefix: "ghaBot_temp"
+                  temp_branch: "ghaBot_temp"
                   commit_message: "Bump versionCode [Skip CI]"
+              env:
+                  GH_TOKEN: ${{ github.token }}
 
 #            - name: Update Gradle props
 #              run: |
