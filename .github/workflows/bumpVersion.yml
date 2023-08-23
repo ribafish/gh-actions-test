@@ -1,4 +1,4 @@
-name: "Staging apk build"
+name: "Bump version protected+main"
 
 on:
     push:
@@ -7,23 +7,21 @@ on:
             - 'main'
 
 jobs:
-    build_task:
+    bump_version:
         runs-on: ubuntu-latest
-        timeout-minutes: 30
+        timeout-minutes: 5
         if: ${{ github.actor != 'GHA-Bot' && contains(github.event.commits[0].message, '[Skip CI]') == false }}
         steps:
             - name: Checkout branch
               uses: actions/checkout@v3
 
             - name: Read Versions Before Bump
-              id: parse_version
               run: cat config/version/mobile.properties
 
             - name: Bump Version
               run: bash .github/scripts/bumpVersion.sh
 
             - name: Read Versions After Bump
-              id: parse_version
               run: cat config/version/mobile.properties
 
             - name: Update Gradle props
