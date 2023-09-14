@@ -43,5 +43,22 @@ jobs:
               env:
                 PTS_MODE: "${{ github.ref_name == 'main' && 'REMAINING_TESTS' || 'RELEVANT_TESTS' }}"
               run: echo "$PTS_MODE"
+            - name: Get job id and stuff
+              run: |
+                  jobs=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs)
+                  job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="$RUNNER_NAME") | .id')
+                  echo "job_execution_id=$job_id"
+                  echo "job_id=$GITHUB_JOB"
+                  echo "workflow_name=$GITHUB_WORKFLOW"
+    test_noname:
+        runs-on: ubuntu-latest
+        steps:
+              - name: Get job id and stuff
+                run: |
+                  jobs=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs)
+                  job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="$RUNNER_NAME") | .id')
+                  echo "job_execution_id=$job_id"
+                  echo "job_id=$GITHUB_JOB"
+                  echo "workflow_name=$GITHUB_WORKFLOW"
 
 
