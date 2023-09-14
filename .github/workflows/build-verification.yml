@@ -44,6 +44,8 @@ jobs:
                 PTS_MODE: "${{ github.ref_name == 'main' && 'REMAINING_TESTS' || 'RELEVANT_TESTS' }}"
               run: echo "$PTS_MODE"
             - name: Get job id and stuff
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
               run: |
                   jobs=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs)
                   job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="$RUNNER_NAME") | .id')
@@ -54,6 +56,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
               - name: Get job id and stuff
+                env:
+                  GITHUB_TOKEN: ${{ github.token }}
                 run: |
                   jobs=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs)
                   job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="$RUNNER_NAME") | .id')
