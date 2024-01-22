@@ -5,13 +5,25 @@ on:
       - main
 jobs:
   gradle-testPath:
-    name: Test path conditionals
-    uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@main
-    with:
-      gradle_task: >-
-        tasks
-        help
-        projects
-        properties
-      workDir: 'testPath'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test path conditionals
+        uses: ribafish/gh-actions-test/.github/workflows/job_gradle_run.yml@main
+        with:
+          gradle_task: >-
+            tasks
+            help
+            projects
+            properties
+          workDir: 'testPath'
+      - name: verify secrets
+        env:
+          SECRET: ${{ secrets.SUPER_SPECIAL_SECRET }}
+        run: echo "SECRET=$SECRET" > t.txt && cat t.txt
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          retention-days: 1
+          name: t.txt
+          path: t.txt
       
