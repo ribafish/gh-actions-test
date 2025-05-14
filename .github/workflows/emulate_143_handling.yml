@@ -1,0 +1,27 @@
+name: Emulate Exit Code 143 Directly
+
+on: [workflow_dispatch] # Allows manual triggering
+
+jobs:
+  emulate_exit_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step that exits with 143
+        run: |
+          echo "This step will simulate a failure with exit code 143." 
+          echo "This step will simulate a failure with exit code 143." &> output.log
+          exit 143
+          
+      - name: Show content of the log file (optional)
+        if: always() # Ensure this step runs even if the previous one fails
+        run: |
+          echo "Contents of output.log:"
+          cat output.log || echo "output.log not found or is empty"
+
+      - name: Upload log file as artifact (optional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: output.log
+          path: output.log
+        
